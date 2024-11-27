@@ -13,7 +13,7 @@ public class PostImage {
     private String name;
 
     @Column(name = "image_number")
-    private int imageNumber;
+    private Integer imageNumber;
 
     @Transient
     private String contentType;
@@ -27,7 +27,7 @@ public class PostImage {
     @Column(name = "post_id")
     private Integer postId;
 
-    public PostImage(String name, int imageNumber, String contentType, String preSignedUrl, String url, Integer postId) {
+    public PostImage(String name, Integer imageNumber, String contentType, String preSignedUrl, String url, Integer postId) {
         this.name = name;
         this.imageNumber = imageNumber;
         this.contentType = contentType;
@@ -42,9 +42,19 @@ public class PostImage {
         this.url = url;
     }
 
-    // for post's image list
-    public PostImage(String url, int imageNumber) {
+    // post's images list for update
+    public PostImage(int postId, String url, String name, Integer imageNumber) {
+        this.postId = postId;
         this.url = url;
+        this.name = name;
+        this.imageNumber = imageNumber;
+    }
+
+
+    // for post's image list
+    public PostImage(String url, String name, Integer imageNumber) {
+        this.url = url;
+        this.name = name;
         this.imageNumber = imageNumber;
     }
 
@@ -63,4 +73,12 @@ public class PostImage {
     public Integer getPostId() { return postId; }
 
     public void setPostId(Integer postId) { this.postId = postId; }
+
+    public Integer getImageNumber() {
+        return imageNumber;
+    }
+
+    public void setImageNumber(Integer imageNumber) {
+        this.imageNumber = imageNumber;
+    }
 }

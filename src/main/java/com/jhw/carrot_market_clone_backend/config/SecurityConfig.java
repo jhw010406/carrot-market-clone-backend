@@ -1,6 +1,6 @@
 package com.jhw.carrot_market_clone_backend.config;
 
-import com.jhw.carrot_market_clone_backend.controller.JwtAuthenticationFilter;
+import com.jhw.carrot_market_clone_backend.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

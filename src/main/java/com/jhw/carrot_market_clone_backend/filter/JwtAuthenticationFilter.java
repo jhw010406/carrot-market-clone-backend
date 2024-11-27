@@ -1,4 +1,4 @@
-package com.jhw.carrot_market_clone_backend.controller;
+package com.jhw.carrot_market_clone_backend.filter;
 
 import com.jhw.carrot_market_clone_backend.repository.UserCertificateRepository;
 import com.jhw.carrot_market_clone_backend.service.JwtService;

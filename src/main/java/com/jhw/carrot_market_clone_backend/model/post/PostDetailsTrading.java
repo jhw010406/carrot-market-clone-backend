@@ -19,9 +19,12 @@ public class PostDetailsTrading {
     @Transient
     private List< Pair<String, Integer> > productImagesForUpload;
 
-    // List< Pair<image_url, image_number> >
     @Transient
-    private List< Pair<String, Integer> > productImagesForGet;
+    private List<PostImage> productImagesForUpdate;
+
+    // List<image_url, image_number>
+    @Transient
+    private List<PostImage> productImagesForGet;
 
     @Column(name = "product_type")
     private String productType;
@@ -44,7 +47,8 @@ public class PostDetailsTrading {
     public PostDetailsTrading(
             int postID,
             List< Pair<String, Integer> > productImagesForUpload,
-            List< Pair<String, Integer> > productImagesForGet,
+            List<PostImage> productImagesForUpdate,
+            List<PostImage> productImagesForGet,
             String productType,
             int productPrice,
             int modelYear,
@@ -54,6 +58,7 @@ public class PostDetailsTrading {
     ){
         this.postID = postID;
         this.productImagesForUpload = productImagesForUpload;
+        this.productImagesForUpdate = productImagesForUpdate;
         this.productImagesForGet = productImagesForGet;
         this.productType = productType;
         this.productPrice = productPrice;
@@ -95,7 +100,9 @@ public class PostDetailsTrading {
 
     public void setProductImagesForUpload(List<Pair<String, Integer>> productImagesForUpload) { this.productImagesForUpload = productImagesForUpload; }
 
-    public List<Pair<String, Integer>> getProductImagesForGet() { return productImagesForGet; }
+    public List<PostImage> getProductImagesForUpdate() { return productImagesForUpdate; }
 
-    public void setProductImagesForGet(List<Pair<String, Integer>> productImagesForGet) { this.productImagesForGet = productImagesForGet; }
+    public List<PostImage> getProductImagesForGet() { return productImagesForGet; }
+
+    public void setProductImagesForGet(List<PostImage> productImagesForGet) { this.productImagesForGet = productImagesForGet; }
 }

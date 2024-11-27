@@ -7,6 +7,7 @@ import com.jhw.carrot_market_clone_backend.model.user.UserInformation;
 import com.jhw.carrot_market_clone_backend.repository.UserCertificateRepository;
 import com.jhw.carrot_market_clone_backend.repository.UserInformationRepository;
 import com.jhw.carrot_market_clone_backend.service.JwtService;
+import com.jhw.carrot_market_clone_backend.service.RegisterService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,49 +19,35 @@ import java.util.Optional;
 
 @RestController
 public class RegisterController {
-    private final UserCertificateRepository userCertificateRepository;
-    private final UserInformationRepository userInformationRepository;
+
+    private final RegisterService registerService;
 
     public RegisterController(
-            UserInformationRepository userInformationRepository,
-            UserCertificateRepository userCertificateRepository
+            RegisterService registerService
     ) {
-        this.userInformationRepository = userInformationRepository;
-        this.userCertificateRepository = userCertificateRepository;
+        this.registerService = registerService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserCertificate> register(@RequestBody UserCertificate inputUserCertificate) {
-        Optional<UserCertificate>   foundUserInfo = userCertificateRepository.findByUserId(inputUserCertificate.getId());
-        String                      userId = inputUserCertificate.getId();
-        String                      password = inputUserCertificate.getPassword();
-        UserCertificate             userCertificate;
-        UserInformation             userInfo;
-        HttpHeaders                 headers = new HttpHeaders();
+    public ResponseEntity<UserInformation> register(
+            @RequestBody UserCertificate inputUserCertificate
+    ) {
+        HttpHeaders     headers = new HttpHeaders();
+        String          userId = inputUserCertificate.getId();
+        UserInformation userInformation = null;
 
-        // If the account is not exist
-        if (foundUserInfo.isEmpty()) {
-            userCertificate = new UserCertificate(
-                    null,
-                    userId,
-                    password
-            );
-            userCertificateRepository.save(userCertificate);
+        try {
+            userInformation = registerService.register(inputUserCertificate);
 
-            userInfo = new UserInformation(
-                    userCertificate.getUid(),
-                    userId,
-                    null
-            );
-            userInformationRepository.save(userInfo);
-
-            headers.add("Authorization", "Bearer " + JwtService.generateAccessToken(userId));
+            headers.set("Authorization", "Bearer " + JwtService.generateAccessToken(userId));
             headers.add("Refresh-Token", "Bearer " + JwtService.generateRefreshToken(userId));
-
-            return new ResponseEntity<>(userCertificate, headers, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
         }
 
-        // when the account is already exist
-        throw new DataAlreadyExistException("Account is already exist");
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .headers(headers)
+                .body(userInformation);
     }
 }

@@ -17,8 +17,15 @@ public interface PostImageRepository extends JpaRepository<PostImage, String> {
     @Query("update post_image_hash p set p.postId = :post_id, p.imageNumber = :image_number where p.name = :filename")
     void updatePostIdAndImageNumberById(
             @Param("filename")  String  filename,
-            @Param("post_id")   int     postID,
+            @Param("post_id")   int     postId,
             @Param("image_number")  int     imageNumber
+    );
+
+    @Transactional
+    @Modifying
+    @Query("delete from post_image_hash p where p.postId = :post_id")
+    void deleteAllByPostId(
+            @Param("post_id")   int postId
     );
 
     @Query("select new com.jhw.carrot_market_clone_backend.model.post.PostImage(p.postId, p.url) from post_image_hash p where p.postId in :post_ids and p.imageNumber = 0 order by p.postId")
@@ -27,8 +34,8 @@ public interface PostImageRepository extends JpaRepository<PostImage, String> {
     );
 
     // List< Pair<image_url, image_number> >
-    @Query("select new org.springframework.data.util.Pair(p.url, p.imageNumber) from post_image_hash p where p.postId = :post_id order by p.imageNumber")
-    List< Pair<String, Integer> > findAllImagesByPostId(
-            @Param("post_id") int postID
+    @Query("select new com.jhw.carrot_market_clone_backend.model.post.PostImage(p.url, p.name, p.imageNumber) from post_image_hash p where (p.postId = :post_id and p.imageNumber is not null) order by p.imageNumber")
+    List<PostImage> findAllImagesByPostId(
+            @Param("post_id") int postId
     );
 }
