@@ -12,7 +12,7 @@
 <h2>프로젝트 내용</h2>
 <ol>
   <li><a href="#1-architecture">Architecture</a></li>
-  <li><a href="#2-architecture">ERD</a></li>
+  <li><a href="#2-erd">ERD</a></li>
   <li>구현 내용</li>
   <ul>
     <li></li>
@@ -24,4 +24,4 @@
 <img src="https://github.com/user-attachments/assets/b0c5dc5d-917f-4dba-b4b7-40cdca42b0b4" width=100%>
 
 <h2>2. ERD</h2>
-
+<img src="https://github.com/user-attachments/assets/94f52b8f-d4cb-4341-aa79-81077a10b6bf">
