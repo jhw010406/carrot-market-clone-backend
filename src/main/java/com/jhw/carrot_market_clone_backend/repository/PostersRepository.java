@@ -2,10 +2,8 @@ package com.jhw.carrot_market_clone_backend.repository;
 
 import com.jhw.carrot_market_clone_backend.model.post.Posters;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

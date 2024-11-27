@@ -1,11 +1,8 @@
 package com.jhw.carrot_market_clone_backend.controller;
 
 
-import com.jhw.carrot_market_clone_backend.model.exception.DataAlreadyExistException;
 import com.jhw.carrot_market_clone_backend.model.user.UserCertificate;
 import com.jhw.carrot_market_clone_backend.model.user.UserInformation;
-import com.jhw.carrot_market_clone_backend.repository.UserCertificateRepository;
-import com.jhw.carrot_market_clone_backend.repository.UserInformationRepository;
 import com.jhw.carrot_market_clone_backend.service.JwtService;
 import com.jhw.carrot_market_clone_backend.service.RegisterService;
 import org.springframework.http.HttpHeaders;
@@ -14,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
 
 @RestController
 public class RegisterController {

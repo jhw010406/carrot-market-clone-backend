@@ -42,15 +42,6 @@ public class PostImage {
         this.url = url;
     }
 
-    // post's images list for update
-    public PostImage(int postId, String url, String name, Integer imageNumber) {
-        this.postId = postId;
-        this.url = url;
-        this.name = name;
-        this.imageNumber = imageNumber;
-    }
-
-
     // for post's image list
     public PostImage(String url, String name, Integer imageNumber) {
         this.url = url;
