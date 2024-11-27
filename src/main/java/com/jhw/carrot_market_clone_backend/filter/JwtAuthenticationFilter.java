@@ -46,7 +46,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (refreshToken != null && refreshToken.startsWith("Bearer ")) {
             refreshToken = refreshToken.substring(7);
 
-            System.out.println("check refresh token");
             try {
                 userId = JwtService.getUserIdInToken(refreshToken);
                 accessToken = JwtService.generateAccessToken(userId);
@@ -55,7 +54,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 response.setHeader("Authorization", "Bearer " + accessToken);
                 response.setHeader("Refresh-Token", "Bearer " + refreshToken);
 
-                System.out.println("provide new tokens succeed");
                 return;
             } catch (Exception e) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "Refresh token expired");
@@ -66,7 +64,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         else if (accessToken != null && accessToken.startsWith("Bearer ")) {
             accessToken = accessToken.substring(7);
 
-            System.out.println("check access token");
             try {
                 userId = JwtService.getUserIdInToken(accessToken);
                 // UsernamePasswordAuthenticationToken : principal = 아이디, credentials = 비밀번호, authorities = 권한
@@ -75,7 +72,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
                 filterChain.doFilter(request, response);
 
-                System.out.println("validate access token succeed");
                 return;
             } catch (Exception e) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");

@@ -17,10 +17,8 @@ public class AuthenticationService {
             if (tokenExpireTime < Instant.now().getEpochSecond()) {
                 return true;
             }
-            System.out.println("[ isValidToken ] access token expired");
         }
         else {
-            System.out.println("[ isValidToken ] access token not valid");
         }
 
         return false;
@@ -36,10 +34,8 @@ public class AuthenticationService {
             if (tokenExpireTime < Instant.now().getEpochSecond()) {
                 return true;
             }
-            System.out.println("[ isValidRefreshToken ] refresh token expired");
         }
         else {
-            System.out.println("[ isValidRefreshToken ] refresh token not valid");
         }
 
         return false;
