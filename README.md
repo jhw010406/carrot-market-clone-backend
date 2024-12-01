@@ -8,7 +8,7 @@
         <img src="https://img.shields.io/badge/Amazon S3-6DB33F?style=for-the-badge&logo=amazons3&logoColor=white">
 </p>
 <br>
-EC2 = 서버 배포,  S3 = 이미지 스토리지 서버, RDS = RDB 서버로 활용했습니다.
+EC2 = 서버 배포,  S3 = 이미지 스토리지 서버, RDS = DB 서버로 활용했습니다.
 <h2>프로젝트 내용</h2>
 <ol>
   <li><a href="#1-architecture">Architecture</a></li>
